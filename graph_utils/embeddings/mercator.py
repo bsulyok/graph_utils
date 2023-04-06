@@ -1,4 +1,4 @@
-import mercator as mercator_embedding
+import mercator # pip install git+https://github.com/networkgeometry/mercator.git@master
 from typing import Dict, List, Any
 from tempfile import TemporaryDirectory
 import networkx as nx
@@ -9,7 +9,7 @@ def embed(G: nx.Graph) -> Dict[Any, List]:
     with TemporaryDirectory() as tempdir:
         nx.write_edgelist(G, f'{tempdir}/graph.edgelist', data=False)
         try:
-            mercator_embedding.embed(f'{tempdir}/graph.edgelist', clean_mode=True, quiet_mode=True)
+            mercator.embed(f'{tempdir}/graph.edgelist', clean_mode=True, quiet_mode=True)
         except:
             pass
         inf_coord = pd.read_csv(f'{tempdir}/graph.inf_coord', delim_whitespace=True, comment='#', names=['vertex', 'kappa', 'theta', 'r'])
