@@ -15,4 +15,4 @@ def embed(G: nx.Graph) -> Dict[Any, List]:
         inf_coord = pd.read_csv(f'{tempdir}/graph.inf_coord', delim_whitespace=True, comment='#', names=['vertex', 'kappa', 'theta', 'r'])
         inf_coord['x'] = inf_coord['r'] * np.cos(inf_coord['theta'])
         inf_coord['y'] = inf_coord['r'] * np.sin(inf_coord['theta'])
-        return dict(zip(inf_coord['vertex'], map(list, inf_coord[['x', 'y']].values)))
+        return dict(zip(inf_coord['vertex'].astype(str), map(list, inf_coord[['x', 'y']].values)))
